@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  viewer:
+    restart: always
+    build: viewer-node/Dockerfile
+    image: viewer-node
+    environment:
+      - VIRTUAL_HOST=viewer.simonesestito.me
+      - VIRTUAL_PORT=80
+    tmpfs:
+      - /tmp
+
+  hoster:
+    restart: always
+    build: hoster-angular/Dockerfile
+    image: hoster-angular
+    environment:
+      - VIRTUAL_HOST=hoster.simonesestito.me
+      - VIRTUAL_PORT=80 

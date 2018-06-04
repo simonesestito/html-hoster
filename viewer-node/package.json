@@ -1,0 +1,19 @@
+{
+  "name": "viewer",
+  "version": "1.0.0",
+  "description": "Viewer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Simone Sestito",
+  "license": "",
+  "dependencies": {
+    "archiver": "^2.1.1",
+    "express": "^4.16.3",
+    "firebase-admin": "^5.12.1",
+    "mime": "^2.3.1",
+    "shelljs": "^0.8.2",
+    "tmp-promise": "^1.0.4"
+  }
+}

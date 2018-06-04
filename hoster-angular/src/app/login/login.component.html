@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright (C) 2018 Simone Sestito
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div class="login-card-container">
+    <mat-card>
+        <mat-card-header>
+            <p matCardTitle>Accedi</p>
+        </mat-card-header>
+        <mat-card-content>
+            <form>
+                <div *ngIf="loginStatus === 'failed'" class="error-box">
+                    Accesso negato: username o password errata
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Email" [(ngModel)]="username" name="username" type="email" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password"
+                           required>
+                </mat-form-field>
+                <br>
+                <button type="submit"
+                        mat-raised-button color="primary"
+                        (click)="submit()"
+                        *ngIf="loginStatus !== 'waiting'">
+                    Entra
+                </button>
+                <mat-spinner *ngIf="loginStatus === 'waiting'" [diameter]="36"></mat-spinner>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

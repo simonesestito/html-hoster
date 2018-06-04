@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright (C) 2018 Simone Sestito
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<p *ngIf="email" matLine class="center-text">Benvenuto, {{email}}!</p>
+
+<button mat-raised-button
+        color="primary"
+        class="right"
+        (click)="onNewProject()">
+    Nuovo progetto
+</button>
+
+<mat-nav-list>
+    <h3 mat-subheader>I miei progetti</h3>
+    <div *ngIf="projects?.length > 0">
+        <mat-list-item *ngFor="let project of projects; let last = last" (click)="onProjectClick(project)">
+            <h4 matLine>{{project.name}}</h4>
+            <mat-chip-list matLine>
+                <mat-chip>
+                    <mat-icon>note_add</mat-icon>
+                    {{ format(project.creationDate) }}
+                </mat-chip>
+                <mat-chip>
+                    <mat-icon>mode_edit</mat-icon>
+                    {{ format(project.lastEditDate) }}
+                </mat-chip>
+            </mat-chip-list>
+            <mat-divider *ngIf="!last"></mat-divider>
+        </mat-list-item>
+    </div>
+</mat-nav-list>
+
+<p class="center-text" *ngIf="projects?.length == 0">
+    Nessun progetto creato
+</p>
+
+<div *ngIf="projects == null" class="center-container">
+    <mat-spinner [diameter]="48"></mat-spinner>
+</div>
