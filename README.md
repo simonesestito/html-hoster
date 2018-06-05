@@ -4,6 +4,7 @@ A platform to host HTML projects.
 It supports HTML, CSS, JS and any type of static resource.
 
 ## Project structure
+
 **[functions](functions)**: the Firebase Cloud Functions, like deleting the project files on project deletion.
 
 **[viewer](viewer)**: the nodejs backend that runs on the viewer subdomain, like project files deployment and zipping.
