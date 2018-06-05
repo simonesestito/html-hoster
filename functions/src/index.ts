@@ -33,3 +33,21 @@ export const deleteFiles = functions.firestore
                     prefix: `projects/${userId}/${projId}`
                 });
         });
+
+/**
+ * Delete all projects when the project owner account is deleted from Firebase
+ */
+export const deleteProjects = functions.auth.user().onDelete(user => {
+    const userId = user.uid;
+    return app.firestore()
+        .collection('projects')
+        .where('owner', '==', userId)
+        .get()
+        .then(snap => {
+            const promises = [];
+            snap.forEach(doc => {
+                promises.push(doc.ref.delete());
+            });
+        return Promise.all(promises);
+    });
+});
