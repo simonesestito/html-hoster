@@ -33,6 +33,7 @@ import {AngularFireStorageModule} from 'angularfire2/storage';
 import {CreationDialogComponent} from './home/creation-dialog/creation-dialog.component';
 import {FileDropAreaComponent} from './project-view/file-drop-area/file-drop-area.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 
 const routes = [
     {path: '', component: HomeComponent, canActivate: [AuthActivate]},
@@ -48,6 +49,7 @@ const routes = [
         ProjectViewComponent,
         CreationDialogComponent,
         FileDropAreaComponent,
+        ConfirmDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -63,6 +65,7 @@ const routes = [
     ],
     entryComponents: [
         CreationDialogComponent,
+        ConfirmDialogComponent,
     ],
     providers: [AuthActivate],
     bootstrap: [AppComponent]
