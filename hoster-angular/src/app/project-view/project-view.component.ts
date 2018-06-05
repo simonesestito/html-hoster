@@ -20,8 +20,9 @@ import {AppbarService} from '../services/appbar.service';
 import {ProjectService} from '../services/project.service';
 import {Project} from '../model/project';
 import {TakeUntilDestroy, untilDestroyed} from 'ngx-take-until-destroy';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {BACKEND_URL, SNACKBAR_ERROR_DURATION, SNACKBAR_NORMAL_DURATION} from '../constants';
+import {ConfirmDialogComponent} from '../dialog/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-project-view',
@@ -42,7 +43,8 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
                 private appbar: AppbarService,
                 private projectService: ProjectService,
                 private router: Router,
-                private snackbar: MatSnackBar) {
+                private snackbar: MatSnackBar,
+                private dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -111,7 +113,45 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
         window.open(BACKEND_URL + '/zip/' + this.project.id);
     }
 
-    deleteProject() {
+    askDeleteProject() {
+        // Ask for confirmation before deleting the project
+        this.dialog.open(ConfirmDialogComponent, {
+            data: {
+                title: 'Eliminare il progetto?',
+                message: 'Non sarà più possibile recuperarlo'
+            }
+        }).afterClosed()
+            .pipe(untilDestroyed(this))
+            .subscribe(result => {
+                // Only if the user confirmed, delete the project
+                if (result === true) {
+                    this.deleteProject();
+                }
+            });
+    }
+
+    askResetProject() {
+        // Ask for confirmation before resetting the project
+        this.dialog.open(ConfirmDialogComponent, {
+            data: {
+                title: 'Svuotare il progetto?',
+                message: 'Non sarà più possibile recuperare i file ora presenti'
+            }
+        }).afterClosed()
+            .pipe(untilDestroyed(this))
+            .subscribe(result => {
+                // Only if the user confirmed, reset the project
+                if (result === true) {
+                    this.resetProject();
+                }
+            });
+    }
+
+    ngOnDestroy() {
+        this.appbar.setTitle(null);
+    }
+
+    private deleteProject() {
         this.loading = true;
         this.projectService.deleteProject(this.project.id)
             .then(() => {
@@ -124,7 +164,7 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
         });
     }
 
-    resetProject() {
+    private resetProject() {
         this.loading = true;
         this.projectService.resetProject(this.project.id).then(() => {
             this.loading = false;
@@ -138,10 +178,6 @@ export class ProjectViewComponent implements OnInit, OnDestroy {
                 duration: SNACKBAR_ERROR_DURATION
             });
         });
-    }
-
-    ngOnDestroy() {
-        this.appbar.setTitle(null);
     }
 
 }
