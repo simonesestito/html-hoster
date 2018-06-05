@@ -7,9 +7,9 @@ It supports HTML, CSS, JS and any type of static resource.
 
 **[functions](functions)**: the Firebase Cloud Functions, like deleting the project files on project deletion.
 
-**[viewer](viewer)**: the nodejs backend that runs on the viewer subdomain, like project files deployment and zipping.
+**[viewer](viewer-node)**: the nodejs backend that runs on the viewer subdomain, like project files deployment and zipping.
 
-**[hoster](hoster)**: the Angular app where you can manage your hosted projects
+**[hoster](hoster-angular)**: the Angular app where you can manage your hosted projects
 
 ## Technologies involved
 - Firebase Storage
