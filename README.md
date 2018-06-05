@@ -1,5 +1,5 @@
 # HTML Hoster
-A platform to host HTML projects.
+The platform where to host HTML projects.
 
 It supports HTML, CSS, JS and any type of static resource.
 
@@ -11,12 +11,8 @@ It supports HTML, CSS, JS and any type of static resource.
 
 **[hoster](hoster-angular)**: the Angular app where you can manage your hosted projects
 
-## Technologies involved
-- Firebase Storage
-- Firebase Cloud Functions
-- Firestore
-- Firebase Authentication
-- Firebase Admin
+## Main technologies used
+- Firebase (Firestore, Storage, Auth, Cloud Functions, Admin)
 - Angular 6 with Typescript
 - Node.JS
 - Express
