@@ -27,6 +27,10 @@ body {
   background-color: $background;
 }
 
+*:focus {
+  outline: none;
+}
+
 .container {
   padding: 16px;
   max-width: 1200px;
